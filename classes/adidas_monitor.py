@@ -36,7 +36,7 @@ class AdidasMonitor():
         self.load_proxies()
 
 
-    def chomp(x):
+    def chomp(self, x):
         if x.endswith("\r\n"):
             return x[:-2]
         if x.endswith("\n") or x.endswith("\r"):
