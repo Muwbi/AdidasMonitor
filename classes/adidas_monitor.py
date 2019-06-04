@@ -125,7 +125,7 @@ class AdidasMonitor():
 
 
     def format_proxy(self, proxy):
-        return {'http': 'http://%s' % chomp(proxy), 'https': 'http://%s' % chomp(proxy)}
+        return {'http': 'http://%s' % self.chomp(proxy), 'https': 'http://%s' % self.chomp(proxy)}
 
 
     def get_stock_url(self):
