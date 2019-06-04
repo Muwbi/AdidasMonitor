@@ -36,6 +36,13 @@ class AdidasMonitor():
         self.load_proxies()
 
 
+    def chomp(x):
+        if x.endswith("\r\n"):
+            return x[:-2]
+        if x.endswith("\n") or x.endswith("\r"):
+            return x[:-1]
+        return x
+        
     def log(self, msg):
         print('[{}]: {}'.format(datetime.now(), msg))
 
@@ -118,19 +125,7 @@ class AdidasMonitor():
 
 
     def format_proxy(self, proxy):
-        try:
-            ip = proxy.split(":")[0]
-            port = proxy.split(":")[1]
-            userpassproxy = '%s:%s' % (ip, port)
-            proxyuser = proxy.split(":")[2].rstrip()
-            proxypass = proxy.split(":")[3].rstrip()
-            proxies = {'http': 'http://%s:%s@%s' % (proxyuser, proxypass, userpassproxy),
-                       'https': 'http://%s:%s@%s' % (proxyuser, proxypass, userpassproxy)}
-
-        except:
-            proxies = {'http': 'http://%s' % proxy, 'https': 'http://%s' % proxy}
-
-        return proxies
+        return {'http': 'http://%s' % chomp(proxy), 'https': 'http://%s' % chomp(proxy)}
 
 
     def get_stock_url(self):
