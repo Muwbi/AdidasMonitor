@@ -185,6 +185,9 @@ class AdidasMonitor():
 
                         else:
                             self.log("Loaded initial status as %s"%self.latest_status)
+                            self.send_to_discord(altered_sizes)
+                            if self.sms_client != None:
+                                self.send_text()
 
                     else:
                         self.log("No update detected, current status is %s"%self.latest_status)
